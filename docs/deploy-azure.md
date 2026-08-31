@@ -31,6 +31,12 @@ az account show --query "{name:name, id:id}" -o table
 No Azure CLI? Install it (`brew install azure-cli`, or see Microsoft's install docs),
 or use the **Cloud Shell** button in the Azure portal, which has it preinstalled.
 
+> **Cloud Shell caveat.** Cloud Shell is a fresh throwaway home directory with no
+> clone of this repository, so the `git` commands later in step 4 will fail there with
+> `not a git repository`. Use Cloud Shell for the `az` commands in steps 1–3 and 5;
+> do the merge in step 4 from the GitHub web UI (no shell needed) or from a checkout
+> on your own machine.
+
 ---
 
 ## 2. Create the resource group and the Static Web App
@@ -87,9 +93,22 @@ Copy that value, then in GitHub:
 | Name | `AZURE_STATIC_WEB_APPS_API_TOKEN` |
 | Secret | the token you just printed |
 
-That is the only secret the deploy needs. It is a write credential for the Static
-Web App — treat it like a password, and never paste it into a file in the repo. If
-it leaks, rotate it with `az staticwebapp secrets reset-api-key`.
+That is the only secret the deploy needs.
+
+> **This token is a write credential for the Static Web App.** Anyone holding it can
+> publish arbitrary content to your site. Treat it like a password: never commit it,
+> never paste it into a chat or an issue, and be careful screenshotting a terminal
+> that has just printed it — the value stays in the scrollback.
+>
+> If it is ever exposed, rotate it and update the GitHub secret with the new value:
+>
+> ```bash
+> az staticwebapp secrets reset-api-key -n swa-orinda-labs -g rg-orinda-web
+> az staticwebapp secrets list -n swa-orinda-labs -g rg-orinda-web \
+>   --query "properties.apiKey" -o tsv
+> ```
+>
+> Rotation takes effect immediately and invalidates the old token.
 
 ---
 
@@ -103,7 +122,15 @@ it leaks, rotate it with `az staticwebapp secrets reset-api-key`.
 > first time. The manual "Run workflow" route only becomes available *after* the
 > first merge.
 
-Set the secret in step 3 **first**, then merge:
+Set the secret in step 3 **first**, then merge.
+
+**In the browser — needs nothing installed, and works from Cloud Shell or a phone:**
+
+<https://github.com/abhimanyub1/orinda-brand/compare/main...claude/orinda-labs-website-azure-wwwpx5>
+
+→ *Create pull request* → *Merge pull request*.
+
+**Or from a checkout on your own machine** (not Cloud Shell — it has no clone):
 
 ```bash
 git checkout main
@@ -111,8 +138,6 @@ git pull origin main
 git merge --no-ff claude/orinda-labs-website-azure-wwwpx5
 git push origin main
 ```
-
-Or open a pull request from the branch into `main` and merge it in the GitHub UI.
 
 The push to `main` triggers the deploy automatically. This is safe to do before DNS:
 no custom domain is attached yet, so "production" is just the
