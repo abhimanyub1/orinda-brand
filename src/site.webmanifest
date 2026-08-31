@@ -1,0 +1,11 @@
+{
+  "name": "Orinda Labs",
+  "short_name": "Orinda",
+  "icons": [
+    { "src": "/assets/brand/orinda-labs-icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#080C16",
+  "background_color": "#060911",
+  "display": "browser",
+  "start_url": "/"
+}

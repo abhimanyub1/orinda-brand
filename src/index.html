@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orinda Labs — Applied AI, built to ship</title>
+
+<!--
+  ────────────────────────────────────────────────────────────────────────
+  EDIT ME: every business fact on this page is marked with  TODO:
+  Search this file for "TODO:" to find all of them in one pass.
+  ────────────────────────────────────────────────────────────────────────
+-->
+
+<meta name="description" content="Orinda Labs is an applied AI studio. We design and ship production AI products — including Raplo, our document capture and understanding platform.">
+<meta name="theme-color" content="#080C16">
+<link rel="canonical" href="https://orindalabs.com/"><!-- TODO: confirm production domain -->
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Orinda Labs — Applied AI, built to ship">
+<meta property="og:description" content="An applied AI studio shipping production systems. Makers of Raplo.">
+<meta property="og:url" content="https://orindalabs.com/"><!-- TODO: confirm production domain -->
+<meta property="og:image" content="/assets/brand/orinda-labs-1024.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/svg+xml" href="/assets/brand/orinda-labs-icon.svg" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/svg+xml" href="/assets/brand/orinda-labs-icon-dark.svg" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/assets/brand/orinda-labs-icon-512.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="image" href="/assets/brand/orinda-labs-dark.svg">
+<link rel="stylesheet" href="/styles.css">
+
+<script>
+  /* Set theme before first paint so there is no flash. */
+  document.documentElement.classList.add('js');
+  try {
+    var t = localStorage.getItem('orinda-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Orinda Labs",
+  "url": "https://orindalabs.com",
+  "logo": "https://orindalabs.com/assets/brand/orinda-labs-1024.png",
+  "description": "Applied AI studio building production AI products, including Raplo.",
+  "email": "hello@orindalabs.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "TODO: street address",
+    "addressLocality": "TODO: city",
+    "addressRegion": "TODO: state",
+    "postalCode": "TODO: ZIP",
+    "addressCountry": "US"
+  }
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ══════════════════════════════ NAV ══════════════════════════════ -->
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="nav__brand" href="#top" aria-label="Orinda Labs home">
+      <img class="logo logo--dark" src="/assets/brand/orinda-labs-dark.svg" alt="Orinda Labs" width="204" height="72">
+      <img class="logo logo--light" src="/assets/brand/orinda-labs.svg" alt="Orinda Labs" width="204" height="72">
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#work">What we do</a>
+      <a href="#raplo">Raplo</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav__actions">
+      <button class="themetoggle" id="themetoggle" type="button" aria-label="Switch colour theme">
+        <svg class="themetoggle__sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/>
+          </g>
+        </svg>
+        <svg class="themetoggle__moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path fill="currentColor" d="M20 14.2A8.4 8.4 0 0 1 9.8 4 8.4 8.4 0 1 0 20 14.2Z"/>
+        </svg>
+      </button>
+      <a class="btn btn--primary btn--sm" href="#contact">Start a project</a>
+      <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobilemenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobilemenu" id="mobilemenu" hidden>
+    <a href="#work">What we do</a>
+    <a href="#raplo">Raplo</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <div class="nav__progress" id="progress" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ══════════════════════════════ HERO ══════════════════════════════ -->
+<section class="hero">
+  <canvas class="hero__canvas" id="constellation" aria-hidden="true"></canvas>
+  <div class="hero__aurora" aria-hidden="true">
+    <span class="blob blob--a"></span>
+    <span class="blob blob--b"></span>
+    <span class="blob blob--c"></span>
+  </div>
+  <div class="hero__grid" aria-hidden="true"></div>
+
+  <div class="wrap hero__inner">
+    <p class="eyebrow reveal">
+      <span class="eyebrow__dot" aria-hidden="true"></span>
+      Applied AI studio
+    </p>
+
+    <h1 class="hero__title reveal" data-delay="1">
+      We build AI that
+      <span class="grad">actually ships.</span>
+    </h1>
+
+    <p class="hero__sub reveal" data-delay="2">
+      Orinda Labs turns messy, real-world documents and workflows into dependable
+      software. We prototype in weeks, harden for production, and hand you
+      something your team can run.
+    </p>
+
+    <div class="hero__cta reveal" data-delay="3">
+      <a class="btn btn--primary" href="#contact">
+        Start a project
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12h13M12.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn--ghost" href="#raplo">
+        See Raplo
+        <img class="btn__logo logo--dark" src="/assets/brand/raplo-ai-icon-dark.svg" alt="" width="18" height="18" aria-hidden="true">
+        <img class="btn__logo logo--light" src="/assets/brand/raplo-ai-icon.svg" alt="" width="18" height="18" aria-hidden="true">
+      </a>
+    </div>
+
+    <dl class="stats reveal" data-delay="4">
+      <div class="stat">
+        <dt>Documents parsed</dt>
+        <dd><span class="count" data-to="4200000" data-suffix="+">0</span></dd>
+      </div>
+      <div class="stat">
+        <dt>Extraction accuracy</dt>
+        <dd><span class="count" data-to="99.2" data-decimals="1" data-suffix="%">0</span></dd>
+      </div>
+      <div class="stat">
+        <dt>Prototype to pilot</dt>
+        <dd><span class="count" data-to="6" data-suffix=" wks">0</span></dd>
+      </div>
+    </dl>
+    <!-- TODO: replace the three stats above with real, defensible numbers,
+         or delete the <dl class="stats"> block entirely. -->
+  </div>
+
+  <a class="scrollcue" href="#work" aria-label="Scroll to content">
+    <span class="scrollcue__line" aria-hidden="true"></span>
+  </a>
+</section>
+
+<!-- ══════════════════════════ MARQUEE ══════════════════════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Document AI</span><i>◆</i><span>Retrieval systems</span><i>◆</i><span>Agent workflows</span><i>◆</i>
+    <span>Evaluation harnesses</span><i>◆</i><span>Data pipelines</span><i>◆</i><span>Model fine-tuning</span><i>◆</i>
+    <span>Document AI</span><i>◆</i><span>Retrieval systems</span><i>◆</i><span>Agent workflows</span><i>◆</i>
+    <span>Evaluation harnesses</span><i>◆</i><span>Data pipelines</span><i>◆</i><span>Model fine-tuning</span><i>◆</i>
+  </div>
+</div>
+
+<!-- ══════════════════════════ WHAT WE DO ══════════════════════════ -->
+<section class="section" id="work">
+  <div class="wrap">
+    <header class="sechead reveal">
+      <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>What we do</p>
+      <h2 class="sechead__title">Four things, done properly.</h2>
+      <p class="sechead__sub">
+        We are deliberately narrow. Every engagement lands in one of these, and
+        every one of them ends with running software — not a slide deck.
+      </p>
+    </header>
+
+    <div class="cards">
+      <article class="card tilt reveal" data-delay="1">
+        <div class="card__glow" aria-hidden="true"></div>
+        <div class="card__icon">
+          <svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true">
+            <rect x="7" y="4" width="20" height="26" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+            <rect x="13" y="10" width="22" height="26" rx="3" fill="none" stroke="currentColor" stroke-width="2" class="draw"/>
+            <path d="M18 18h12M18 23h12M18 28h7" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="draw"/>
+          </svg>
+        </div>
+        <h3>Document intelligence</h3>
+        <p>
+          Contracts, invoices, claims, statements, scanned nightmares. We build
+          capture pipelines that read them, structure them, and know when they
+          are unsure.
+        </p>
+        <ul class="card__list">
+          <li>OCR + layout-aware extraction</li>
+          <li>Schema-validated output</li>
+          <li>Confidence scoring &amp; human review loops</li>
+        </ul>
+      </article>
+
+      <article class="card tilt reveal" data-delay="2">
+        <div class="card__glow" aria-hidden="true"></div>
+        <div class="card__icon">
+          <svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true">
+            <circle cx="20" cy="20" r="5" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="8" cy="9" r="3.4" fill="none" stroke="currentColor" stroke-width="2" class="draw"/>
+            <circle cx="33" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="2" class="draw"/>
+            <circle cx="11" cy="32" r="3.4" fill="none" stroke="currentColor" stroke-width="2" class="draw"/>
+            <circle cx="31" cy="31" r="3.4" fill="none" stroke="currentColor" stroke-width="2" class="draw"/>
+            <path d="M10.6 11.4 16.6 17M30.4 14.1 24.3 17.4M13.5 30 17 24.5M28.6 28.7 23.6 23.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="draw"/>
+          </svg>
+        </div>
+        <h3>Retrieval &amp; knowledge</h3>
+        <p>
+          Search that answers instead of guessing. Chunking, embeddings,
+          reranking and citations, tuned against your own corpus rather than a
+          benchmark.
+        </p>
+        <ul class="card__list">
+          <li>Hybrid vector + keyword retrieval</li>
+          <li>Grounded answers with citations</li>
+          <li>Permission-aware indexes</li>
+        </ul>
+      </article>
+
+      <article class="card tilt reveal" data-delay="3">
+        <div class="card__glow" aria-hidden="true"></div>
+        <div class="card__icon">
+          <svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true">
+            <rect x="4" y="6" width="12" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
+            <rect x="24" y="6" width="12" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="2" class="draw"/>
+            <rect x="14" y="26" width="12" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="2" class="draw"/>
+            <path d="M10 16v5h20v-5M20 21v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="draw"/>
+          </svg>
+        </div>
+        <h3>Agentic workflows</h3>
+        <p>
+          Multi-step automations with real guardrails: tool budgets, retries,
+          idempotency, audit trails, and a stop button that actually stops
+          things.
+        </p>
+        <ul class="card__list">
+          <li>Tool-using agents with budgets</li>
+          <li>Deterministic orchestration</li>
+          <li>Full run traces &amp; replay</li>
+        </ul>
+      </article>
+
+      <article class="card tilt reveal" data-delay="4">
+        <div class="card__glow" aria-hidden="true"></div>
+        <div class="card__icon">
+          <svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true">
+            <path d="M5 33V19M14 33V9M23 33V24M32 33V14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" class="draw"/>
+            <path d="M3 36h34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Evaluation &amp; reliability</h3>
+        <p>
+          The unglamorous part that decides whether any of it survives contact
+          with production. Golden sets, regression gates, drift alerts, cost
+          ceilings.
+        </p>
+        <ul class="card__list">
+          <li>Golden datasets &amp; scorers</li>
+          <li>CI gates on every model change</li>
+          <li>Latency and spend budgets</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ RAPLO ══════════════════════════ -->
+<section class="section section--raplo" id="raplo">
+  <div class="raplo__wash" aria-hidden="true"></div>
+  <div class="wrap raplo">
+    <div class="raplo__copy">
+      <p class="eyebrow reveal"><span class="eyebrow__dot eyebrow__dot--raplo" aria-hidden="true"></span>Our product</p>
+
+      <div class="raplo__logo reveal" data-delay="1">
+        <img class="logo logo--dark" src="/assets/brand/raplo-ai-dark.svg" alt="Raplo AI" width="226" height="72">
+        <img class="logo logo--light" src="/assets/brand/raplo-ai.svg" alt="Raplo AI" width="226" height="72">
+      </div>
+
+      <h2 class="raplo__title reveal" data-delay="2">
+        Raplo Capture turns any document into clean, structured data.
+      </h2>
+
+      <p class="raplo__sub reveal" data-delay="3">
+        Drop in a PDF, a photo of a receipt, a forty-page contract or a fax from
+        1998. Raplo Capture reads it, extracts the fields you asked for,
+        validates them against your schema, and flags anything it is not sure
+        about — so a human only ever looks at the 3% that needs a human.
+      </p>
+
+      <ul class="ticks reveal" data-delay="4">
+        <li>Point-and-click field schemas — no model training required</li>
+        <li>Per-field confidence with a built-in review queue</li>
+        <li>Webhooks and a REST API that fit into what you already run</li>
+        <li>Your data stays in your tenant</li>
+      </ul>
+
+      <div class="raplo__cta reveal" data-delay="5">
+        <!-- TODO: point these at the real Raplo Capture URLs -->
+        <a class="btn btn--raplo" href="https://raplo.ai" target="_blank" rel="noopener">
+          Open Raplo Capture
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="https://raplo.ai/docs" target="_blank" rel="noopener">API docs</a>
+      </div>
+    </div>
+
+    <!-- Animated product mock -->
+    <div class="mock reveal" data-delay="3" aria-hidden="true">
+      <div class="mock__frame">
+        <div class="mock__bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="mock__url">raplo.ai / capture</span>
+        </div>
+        <div class="mock__body">
+          <div class="mock__doc">
+            <div class="mock__scan"></div>
+            <div class="ln ln--title"></div>
+            <div class="ln w80"></div><div class="ln w95"></div><div class="ln w70"></div>
+            <div class="ln w88"></div><div class="ln w60"></div>
+            <div class="mock__box mock__box--1"></div>
+            <div class="mock__box mock__box--2"></div>
+            <div class="ln w92"></div><div class="ln w74"></div><div class="ln w85"></div>
+          </div>
+          <div class="mock__fields">
+            <p class="mock__fieldshead">Extracted fields</p>
+            <div class="field" style="--d:.0s"><span>Invoice&nbsp;#</span><b>INV-20418</b><i class="pill pill--ok">99%</i></div>
+            <div class="field" style="--d:.15s"><span>Vendor</span><b>Northgate Supply</b><i class="pill pill--ok">98%</i></div>
+            <div class="field" style="--d:.3s"><span>Issued</span><b>2026-07-14</b><i class="pill pill--ok">99%</i></div>
+            <div class="field" style="--d:.45s"><span>Subtotal</span><b>$18,420.00</b><i class="pill pill--ok">97%</i></div>
+            <div class="field" style="--d:.6s"><span>Tax ID</span><b>—</b><i class="pill pill--warn">review</i></div>
+            <div class="field" style="--d:.75s"><span>Total</span><b>$19,995.60</b><i class="pill pill--ok">99%</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ PROCESS ══════════════════════════ -->
+<section class="section" id="process">
+  <div class="wrap">
+    <header class="sechead reveal">
+      <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>How we work</p>
+      <h2 class="sechead__title">Small team. Short loops. No theatre.</h2>
+    </header>
+
+    <ol class="timeline">
+      <li class="step reveal" data-delay="1">
+        <span class="step__num">01</span>
+        <h3>Scope in a week</h3>
+        <p>We take your hardest real examples — not the clean ones — and come back with a written scope, a success metric, and a fixed price.</p>
+      </li>
+      <li class="step reveal" data-delay="2">
+        <span class="step__num">02</span>
+        <h3>Prototype in three</h3>
+        <p>A working thing you can click, measured against a golden set from day one. If the numbers do not move, we say so early.</p>
+      </li>
+      <li class="step reveal" data-delay="3">
+        <span class="step__num">03</span>
+        <h3>Harden for production</h3>
+        <p>Auth, rate limits, observability, cost caps, CI eval gates, and runbooks. The boring layer that keeps it alive.</p>
+      </li>
+      <li class="step reveal" data-delay="4">
+        <span class="step__num">04</span>
+        <h3>Hand over, properly</h3>
+        <p>Your repo, your cloud, your keys. Documentation and a walkthrough, plus a support window while your team takes the wheel.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════════════════ CONTACT ══════════════════════════ -->
+<section class="section section--contact" id="contact">
+  <div class="wrap contact">
+    <div class="contact__copy">
+      <header class="sechead sechead--left reveal">
+        <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>Contact</p>
+        <h2 class="sechead__title">Tell us what is breaking.</h2>
+        <p class="sechead__sub">
+          Send the ugly version of the problem. We reply to everything within two
+          business days.
+        </p>
+      </header>
+
+      <!--
+        TODO: this form posts to Formspree as a no-backend default.
+        Replace FORM_ENDPOINT with your own endpoint, or delete the <form>
+        and keep the mailto link below it.
+      -->
+      <form class="form reveal" data-delay="1" id="contactform"
+            action="https://formspree.io/f/FORM_ENDPOINT" method="POST">
+        <div class="field2">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field2">
+          <label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field2">
+          <label for="f-company">Company <span class="opt">optional</span></label>
+          <input id="f-company" name="company" type="text" autocomplete="organization">
+        </div>
+        <div class="field2">
+          <label for="f-msg">What are you trying to build?</label>
+          <textarea id="f-msg" name="message" rows="5" required></textarea>
+        </div>
+        <button class="btn btn--primary btn--full" type="submit">
+          Send message
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12h13M12.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="form__status" id="formstatus" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="contact__alt">
+        Prefer email? <a href="mailto:hello@orindalabs.com">hello@orindalabs.com</a>
+        <!-- TODO: confirm contact email address -->
+      </p>
+    </div>
+
+    <!-- ── Company / Northwest Registered Agent details ── -->
+    <aside class="legalcard reveal" data-delay="2" aria-labelledby="legalcard-h">
+      <h3 id="legalcard-h">Company details</h3>
+
+      <dl class="legal">
+        <div>
+          <dt>Legal entity</dt>
+          <dd>Orinda Labs LLC<!-- TODO: exact registered entity name, e.g. "Orinda Labs, LLC" --></dd>
+        </div>
+        <div>
+          <dt>Entity type &amp; jurisdiction</dt>
+          <dd>Limited Liability Company<br>State of <span class="todo">TODO: state of formation</span></dd>
+        </div>
+        <div>
+          <dt>State filing / entity number</dt>
+          <dd><span class="todo">TODO: entity or UBI number from your Northwest account</span></dd>
+        </div>
+        <div>
+          <dt>Registered agent</dt>
+          <dd>
+            Northwest Registered Agent, LLC<br>
+            <span class="todo">TODO: registered agent street address</span><br>
+            <span class="todo">TODO: city, state, ZIP</span>
+          </dd>
+        </div>
+        <div>
+          <dt>Mailing address</dt>
+          <dd>
+            <span class="todo">TODO: business mailing address</span><br>
+            <span class="todo">TODO: city, state, ZIP</span>
+          </dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd><a href="mailto:hello@orindalabs.com">hello@orindalabs.com</a></dd>
+        </div>
+        <div>
+          <dt>Phone</dt>
+          <dd><span class="todo">TODO: phone number, or delete this row</span></dd>
+        </div>
+      </dl>
+
+      <p class="legal__note">
+        Service of process should be directed to the registered agent above.
+      </p>
+    </aside>
+  </div>
+</section>
+</main>
+
+<!-- ══════════════════════════ FOOTER ══════════════════════════ -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__brand">
+      <img class="logo logo--dark" src="/assets/brand/orinda-labs-dark.svg" alt="Orinda Labs" width="204" height="72">
+      <img class="logo logo--light" src="/assets/brand/orinda-labs.svg" alt="Orinda Labs" width="204" height="72">
+      <p>Applied AI, built to ship.</p>
+    </div>
+
+    <nav class="footer__col" aria-label="Company">
+      <h4>Company</h4>
+      <a href="#work">What we do</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <nav class="footer__col" aria-label="Product">
+      <h4>Product</h4>
+      <a href="https://raplo.ai" target="_blank" rel="noopener">Raplo Capture</a>
+      <a href="https://raplo.ai/docs" target="_blank" rel="noopener">API docs</a>
+      <a href="#raplo">Overview</a>
+    </nav>
+
+    <nav class="footer__col" aria-label="Legal">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="#contact">Registered agent</a>
+    </nav>
+  </div>
+
+  <div class="wrap footer__bottom">
+    <p>&copy; <span id="year">2026</span> Orinda Labs LLC. All rights reserved.</p>
+    <p class="footer__ra">
+      Registered agent: Northwest Registered Agent, LLC ·
+      <span class="todo">TODO: RA city, state</span>
+    </p>
+  </div>
+</footer>
+
+<script src="/main.js" defer></script>
+</body>
+</html>
