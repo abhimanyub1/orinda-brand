@@ -1,0 +1,16 @@
+{
+  "name": "Orinda Labs",
+  "short_name": "Orinda Labs",
+  "description": "Orinda Labs LLC \u2014 commercial ambient intelligence software for events and venues.",
+  "icons": [
+    {
+      "src": "/assets/brand/orinda-labs-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#cc785c",
+  "background_color": "#f0eee6",
+  "display": "browser",
+  "start_url": "/"
+}
