@@ -1,4 +1,4 @@
-name: Deploy to Azure Static Web Apps
+name: Deploy orindalabs.com (Azure Static Web Apps)
 
 on:
   push:
@@ -7,6 +7,11 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches: [main]
   workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "deploy" to publish this branch to PRODUCTION'
+        required: true
+        default: ''
 
 concurrency:
   group: swa-${{ github.event.pull_request.number || github.ref }}
@@ -22,18 +27,45 @@ jobs:
     if: github.event_name != 'pull_request' || github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
+      - name: Confirm a manual production deploy
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "deploy" ]; then
+            echo "::error::Type 'deploy' in the confirm box to publish to production. Got: '${{ github.event.inputs.confirm }}'"
+            exit 1
+          fi
+          echo "Manual deploy confirmed for ref ${{ github.ref_name }}."
+
       - uses: actions/checkout@v4
         with:
           submodules: false
           lfs: false
 
-      - name: Validate static assets
+      - name: Check the deployment token exists
+        env:
+          TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+        run: |
+          if [ -z "${TOKEN}" ]; then
+            echo "::error::Repository secret AZURE_STATIC_WEB_APPS_API_TOKEN is not set."
+            echo "Create the Static Web App, then: Settings → Secrets and variables → Actions."
+            echo "See docs/deploy-azure.md for the exact commands."
+            exit 1
+          fi
+          echo "Deployment token present."
+
+      - name: Content rules and entity facts
+        run: python3 scripts/site-check.py
+
+      - name: Config files parse
         run: |
           set -euo pipefail
-          test -f src/index.html
-          test -f src/staticwebapp.config.json
+          python3 -c "import json; json.load(open('config/site.json'))"
           python3 -c "import json; json.load(open('src/staticwebapp.config.json'))"
+          python3 -c "import json; json.load(open('src/site.webmanifest'))"
           python3 -c "import xml.dom.minidom as m; m.parse('src/sitemap.xml')"
+          test -f src/index.html
+          test -f src/fonts/inter.woff2
+          test -f src/brand/raplo-theme.css
           echo "Static assets look sane."
 
       - name: Deploy
@@ -49,6 +81,30 @@ jobs:
           output_location: ""
           skip_app_build: true
           skip_api_build: true
+
+      - name: Verify the deploy is actually live
+        if: github.event_name != 'pull_request'
+        env:
+          URL: ${{ steps.deploy.outputs.static_web_app_url }}
+        run: |
+          set -euo pipefail
+          if [ -z "${URL}" ]; then
+            echo "::warning::No URL returned by the deploy step; skipping verification."
+            exit 0
+          fi
+          echo "Verifying https://${URL#https://}"
+          for i in 1 2 3 4 5 6; do
+            body="$(curl -fsSL --max-time 20 "https://${URL#https://}/" || true)"
+            if printf '%s' "$body" | grep -q "Orinda Labs LLC"; then
+              echo "Live: the deployed home page names Orinda Labs LLC."
+              printf '%s' "$body" | grep -o '<title>[^<]*</title>' || true
+              exit 0
+            fi
+            echo "Attempt $i: not live yet, waiting 10s…"
+            sleep 10
+          done
+          echo "::error::Deployed, but the live page did not serve the expected content within 60s."
+          exit 1
 
   close_pull_request:
     name: Tear down PR preview

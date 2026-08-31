@@ -115,26 +115,27 @@ Serve from `src/` rather than opening the files directly — every path is root-
 push to `main`, builds a preview environment for each pull request, and tears the preview down
 when the PR closes.
 
-### One-time Azure setup
+**Full step-by-step runbook: [docs/deploy-azure.md](docs/deploy-azure.md)** — resource
+creation, the deployment token, the first deploy, custom domain, rollback, and cost.
+
+The short version:
 
 ```bash
-az login
+az login && az account set --subscription "<SUBSCRIPTION>"
 az group create --name rg-orinda-web --location westus2
-az staticwebapp create \
-  --name swa-orinda-labs \
-  --resource-group rg-orinda-web \
-  --location westus2 \
-  --sku Free
-
-# Deployment token → GitHub secret
-az staticwebapp secrets list \
-  --name swa-orinda-labs \
-  --resource-group rg-orinda-web \
+az staticwebapp create --name swa-orinda-labs --resource-group rg-orinda-web \
+  --location westus2 --sku Free
+az staticwebapp secrets list --name swa-orinda-labs --resource-group rg-orinda-web \
   --query "properties.apiKey" -o tsv
 ```
 
-Add that value as the repository secret **`AZURE_STATIC_WEB_APPS_API_TOKEN`**
+Add that token as the repository secret **`AZURE_STATIC_WEB_APPS_API_TOKEN`**
 (GitHub → Settings → Secrets and variables → Actions). It is the only secret the workflow needs.
+
+**First deploy without merging:** Actions → *Deploy orindalabs.com (Azure Static Web Apps)* →
+Run workflow → pick this branch → type `deploy`. The run refuses to publish unless you type it,
+fails early with a clear message if the secret is missing, runs `site-check.py`, and then polls
+the live URL until it actually serves the new page — so green means live, not just uploaded.
 
 ### Custom domain
 
