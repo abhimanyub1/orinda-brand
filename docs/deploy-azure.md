@@ -93,22 +93,77 @@ it leaks, rotate it with `az staticwebapp secrets reset-api-key`.
 
 ---
 
-## 4. Deploy and confirm it works
+## 4. Merge to `main`, which deploys
 
-You do **not** have to merge to `main` for the first deploy. Publish the branch
-directly so you can look at the real thing before touching DNS:
+> **Why you cannot run it from the feature branch.** GitHub only lists a
+> `workflow_dispatch` workflow in the **Actions** tab if that workflow file exists on
+> the repository's **default branch**. Until `.github/workflows/` is on `main`, the
+> Actions tab has nothing to offer you — no "Run workflow" button, and the workflow
+> name will not appear in the left-hand sidebar. This trips up almost everyone the
+> first time. The manual "Run workflow" route only becomes available *after* the
+> first merge.
+
+Set the secret in step 3 **first**, then merge:
+
+```bash
+git checkout main
+git pull origin main
+git merge --no-ff claude/orinda-labs-website-azure-wwwpx5
+git push origin main
+```
+
+Or open a pull request from the branch into `main` and merge it in the GitHub UI.
+
+The push to `main` triggers the deploy automatically. This is safe to do before DNS:
+no custom domain is attached yet, so "production" is just the
+`*.azurestaticapps.net` URL that nobody else knows about. You still get to look at
+the real thing before pointing the domain at it.
+
+If the secret is not set yet, the run fails immediately at the token check with an
+explanatory message and nothing is published — so a premature merge costs you a red
+run, not a broken site. Set the secret and re-run.
+
+### After the first merge
+
+The workflow now exists on `main`, so the manual route works from then on:
 
 **GitHub → Actions → "Deploy orindalabs.com (Azure Static Web Apps)" → Run workflow**
 
-- **Use workflow from:** `claude/orinda-labs-website-azure-wwwpx5`
+- **Use workflow from:** any branch
 - **Confirm:** type `deploy`
 
-The run will refuse to publish unless you type `deploy`, fails early with a clear
-message if the secret is missing, runs `scripts/site-check.py`, uploads `src/`, and
-then polls the live URL until it actually serves the new page. A green run means the
-site is genuinely live, not just that the upload returned 200.
+It refuses to publish unless you type `deploy`, runs `scripts/site-check.py`, uploads
+`src/`, and then polls the live URL until it actually serves the new page. A green run
+means the site is genuinely live, not just that the upload returned 200.
 
-Open the `defaultHostname` from step 2 and check the real thing:
+### Still no Actions tab at all?
+
+If the tab itself is missing rather than empty:
+
+- **Actions may be disabled for the repository.** Settings → Actions → General →
+  *Allow all actions and reusable workflows* → Save.
+- **Narrow browser window.** The tab collapses into the `…` overflow menu next to
+  *Insights*.
+- **You may be in the Azure portal.** This step is on GitHub, at
+  `https://github.com/abhimanyub1/orinda-brand/actions` — Azure does not run it.
+
+### Deploying without GitHub at all
+
+If you would rather publish straight from your own machine, the Static Web Apps CLI
+takes the same token:
+
+```bash
+npx @azure/static-web-apps-cli deploy ./src \
+  --deployment-token "<the token from step 3>" \
+  --env production
+```
+
+Useful as a fallback, but prefer the workflow — it runs `site-check.py` and verifies
+the deploy went live, which a bare CLI push does not.
+
+### Check the real thing
+
+Open the `defaultHostname` from step 2 and confirm:
 
 - The home page states the legal name, California LLC, the Sacramento address, and
   the subscription revenue model.
@@ -117,9 +172,8 @@ Open the `defaultHostname` from step 2 and check the real thing:
 - Fonts render as Fraunces headings and Inter body text (proof `/fonts/` resolved).
 - The light/dark toggle works.
 
-Once you are happy, merge the branch to `main`. From then on every push to `main`
-deploys, and every pull request gets its own preview URL that is torn down when the
-PR closes.
+From here on, every push to `main` deploys, and every pull request gets its own
+preview URL that is torn down when the PR closes.
 
 ---
 

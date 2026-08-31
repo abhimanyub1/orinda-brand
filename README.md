@@ -132,10 +132,16 @@ az staticwebapp secrets list --name swa-orinda-labs --resource-group rg-orinda-w
 Add that token as the repository secret **`AZURE_STATIC_WEB_APPS_API_TOKEN`**
 (GitHub → Settings → Secrets and variables → Actions). It is the only secret the workflow needs.
 
-**First deploy without merging:** Actions → *Deploy orindalabs.com (Azure Static Web Apps)* →
-Run workflow → pick this branch → type `deploy`. The run refuses to publish unless you type it,
-fails early with a clear message if the secret is missing, runs `site-check.py`, and then polls
-the live URL until it actually serves the new page — so green means live, not just uploaded.
+**The first deploy has to be a merge to `main`.** GitHub only lists a `workflow_dispatch`
+workflow in the Actions tab once the workflow file is on the default branch, so the "Run
+workflow" button does not exist until `.github/workflows/` lands on `main`. Set the secret
+first, then merge — the push to `main` deploys. Safe before DNS: no custom domain is attached
+yet, so production is just the `*.azurestaticapps.net` URL.
+
+After that first merge, manual runs work: Actions → *Deploy orindalabs.com (Azure Static Web
+Apps)* → Run workflow → type `deploy`. The run refuses to publish unless you type it, fails
+early with a clear message if the secret is missing, runs `site-check.py`, and then polls the
+live URL until it actually serves the new page — so green means live, not just uploaded.
 
 ### Custom domain
 
