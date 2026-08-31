@@ -38,13 +38,17 @@ They cover:
 
 | Where | What |
 |---|---|
-| `index.html` head | canonical URL, OG URL, schema.org postal address |
+| `index.html` head | canonical URL, OG URL |
 | `index.html` hero | the three headline statistics |
 | `index.html` Raplo section | Raplo Capture and API docs URLs |
 | `index.html` contact | form endpoint, contact email |
-| `index.html` company details | **Northwest registered agent details** — entity name, state of formation, filing number, RA address, mailing address, phone |
-| `privacy.html`, `terms.html` | dates, retention period, governing-law state |
+| `index.html` company details | exact registered entity name, state filing / entity number |
+| `privacy.html`, `terms.html` | dates, retention period |
 | `sitemap.xml` | production domain |
+
+Already filled in: registered agent address (2108 N St, Ste N, Sacramento, CA
+95816), mailing address, phone `(925) 540-2024`, California jurisdiction, and
+the matching schema.org `PostalAddress` / `ContactPoint`.
 
 ### The Northwest registration block
 
@@ -58,7 +62,9 @@ Two things worth getting right:
 - **Registered agent address vs. mailing address are not the same thing.** The
   RA address is Northwest's, and it is the address for service of process. Your
   mailing address may be Northwest's mail forwarding address or your own — use
-  whichever you actually want on a public page.
+  whichever you actually want on a public page. Both currently show the same
+  Sacramento address; change the mailing one if you would rather publish your
+  own.
 - If you use Northwest's privacy-by-default setup, the RA address is the one
   already on your public state filing, so publishing it exposes nothing new.
 
