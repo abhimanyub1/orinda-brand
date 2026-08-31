@@ -1,0 +1,29 @@
+name: Site check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Content rules, entity facts, links and placeholders
+        run: python3 scripts/site-check.py
+
+      - name: Config files parse
+        run: |
+          set -euo pipefail
+          python3 -c "import json; json.load(open('config/site.json'))"
+          python3 -c "import json; json.load(open('src/staticwebapp.config.json'))"
+          python3 -c "import json; json.load(open('src/site.webmanifest'))"
+          python3 -c "import xml.dom.minidom as m; m.parse('src/sitemap.xml')"
+          echo "All config files parse."

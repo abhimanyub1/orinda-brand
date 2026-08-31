@@ -1,0 +1,33 @@
+{
+  "_comment": "SINGLE SOURCE OF TRUTH for the Orinda Labs corporate site. Change a value HERE, mirror it in the static HTML, then run `python3 scripts/site-check.py` to prove nothing stale survived. The pages are static HTML with no build step, so they cannot import this at runtime — the check script is what keeps them honest.",
+  "domain": "https://orindalabs.com",
+  "entity": {
+    "legalName": "Orinda Labs LLC",
+    "entityType": "Limited liability company",
+    "jurisdiction": "State of California, USA",
+    "formedYear": null,
+    "mailingAddress": "2108 N St, Ste N, Sacramento, CA 95816, USA",
+    "copyright": "© 2026 Orinda Labs LLC",
+    "footerLine": "Orinda Labs LLC is the maker of Raplo Capture."
+  },
+  "contact": {
+    "info": "info@orindalabs.com",
+    "legal": "legal@orindalabs.com",
+    "privacy": "privacy@orindalabs.com",
+    "support": "support@raplo.ai",
+    "phoneDisplay": "(925) 540-2024",
+    "phoneTel": "+19255402024"
+  },
+  "product": {
+    "name": "Raplo Capture",
+    "status": "available now",
+    "site": "https://raplo.ai/",
+    "app": "https://capture.raplo.ai",
+    "pricing": "https://raplo.ai/pricing.html"
+  },
+  "inDevelopment": [
+    "Raplo Me", "Raplo Handshake", "Raplo Whisper", "Raplo Autopilot", "Raplo Floor"
+  ],
+  "_inDevelopmentNote": "Every name in this list MUST carry a visible 'In development' label wherever it appears on the site, and must never be attached to pricing, signup, or a waitlist. scripts/site-check.py enforces the label.",
+  "pages": ["index.html", "vision.html", "company.html", "contact.html", "terms.html", "privacy.html", "404.html"]
+}

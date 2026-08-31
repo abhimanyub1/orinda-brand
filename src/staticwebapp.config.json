@@ -9,28 +9,19 @@
     "X-Content-Type-Options": "nosniff",
     "Referrer-Policy": "strict-origin-when-cross-origin",
     "Permissions-Policy": "geolocation=(), microphone=(), camera=(), interest-cohort=()",
-    "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'"
+    "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'none'; form-action 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
   },
   "routes": [
-    {
-      "route": "/assets/*",
-      "headers": { "Cache-Control": "public, max-age=31536000, immutable" }
-    },
-    {
-      "route": "/*.html",
-      "headers": { "Cache-Control": "public, max-age=0, must-revalidate" }
-    },
-    {
-      "route": "/styles.css",
-      "headers": { "Cache-Control": "public, max-age=3600" }
-    },
-    {
-      "route": "/main.js",
-      "headers": { "Cache-Control": "public, max-age=3600" }
-    }
+    { "route": "/fonts/*",  "headers": { "Cache-Control": "public, max-age=31536000, immutable" } },
+    { "route": "/assets/*", "headers": { "Cache-Control": "public, max-age=31536000, immutable" } },
+    { "route": "/*.html",   "headers": { "Cache-Control": "public, max-age=0, must-revalidate" } },
+    { "route": "/site.css", "headers": { "Cache-Control": "public, max-age=3600" } },
+    { "route": "/site.js",  "headers": { "Cache-Control": "public, max-age=3600" } },
+    { "route": "/brand/*",  "headers": { "Cache-Control": "public, max-age=3600" } }
   ],
   "mimeTypes": {
     ".svg": "image/svg+xml",
+    ".woff2": "font/woff2",
     ".json": "application/json",
     ".webmanifest": "application/manifest+json"
   }

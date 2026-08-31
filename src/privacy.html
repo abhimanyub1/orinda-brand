@@ -1,68 +1,212 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy Policy — Orinda Labs</title>
-<meta name="robots" content="index,follow">
-<meta name="theme-color" content="#080C16">
-<link rel="icon" type="image/svg+xml" href="/assets/brand/orinda-labs-icon-dark.svg">
-<link rel="stylesheet" href="/styles.css">
-<script>try{var t=localStorage.getItem('orinda-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
-<style>
-  .doc { padding: 9rem 0 5rem; }
-  .doc .wrap { max-width: 74ch; }
-  .doc h1 { font-size: clamp(2rem,5vw,3rem); margin-bottom: .6rem; }
-  .doc .updated { color: var(--text-faint); font-size: .85rem; margin-bottom: 2.5rem; }
-  .doc h2 { font-size: 1.2rem; margin: 2.4rem 0 .7rem; }
-  .doc p, .doc li { color: var(--text-dim); margin-bottom: .9rem; }
-  .doc ul { list-style: disc; padding-left: 1.3rem; }
-  .doc a { color: var(--blue); border-bottom: 1px solid currentColor; }
-  .back { display:inline-flex; gap:.4rem; align-items:center; color: var(--text-dim); font-size:.9rem; margin-bottom:2rem; }
-</style>
+<title>Privacy Policy — Orinda Labs LLC</title>
+<meta name="description" content="How Orinda Labs LLC handles personal information collected through its website. No third-party analytics or trackers. Raplo Capture has its own product privacy policy.">
+<meta name="author" content="Orinda Labs LLC">
+<!-- OWNER: fill — confirm the final production domain, then run scripts/site-check.py -->
+<link rel="canonical" href="https://orindalabs.com/privacy.html">
+<meta name="theme-color" content="#cc785c">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Orinda Labs">
+<meta property="og:title" content="Privacy Policy — Orinda Labs LLC">
+<meta property="og:description" content="How Orinda Labs LLC handles personal information collected through its website. No third-party analytics or trackers. Raplo Capture has its own product privacy policy.">
+<meta property="og:url" content="https://orindalabs.com/privacy.html">
+<meta property="og:image" content="https://orindalabs.com/assets/brand/orinda-labs-1024.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/svg+xml" href="/assets/brand/orinda-labs-icon.svg" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/svg+xml" href="/assets/brand/orinda-labs-icon-dark.svg" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="/assets/brand/orinda-labs-icon-512.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/brand/raplo-theme.css">
+<link rel="stylesheet" href="/site.css">
+<script>
+  document.documentElement.classList.add('js');
+  try { var t = localStorage.getItem('orinda-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
 </head>
 <body>
-<main class="doc">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
   <div class="wrap">
-    <a class="back" href="/">&larr; Back to Orinda Labs</a>
-    <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: <span class="todo">TODO: date</span></p>
-
-    <p><strong class="todo">TODO: have counsel review this template before publishing.</strong>
-    It is a starting skeleton, not legal advice.</p>
-
-    <h2>Who we are</h2>
-    <p>Orinda Labs LLC ("Orinda Labs", "we", "us") operates this website and the
-    Raplo product. Our registered agent and mailing details are listed on the
-    <a href="/#contact">contact section</a> of our home page.</p>
-
-    <h2>What we collect</h2>
-    <ul>
-      <li><strong>Information you send us.</strong> Name, email, company and message
-      content when you submit the contact form or email us.</li>
-      <li><strong>Basic request logs.</strong> Our host records IP address, user agent
-      and requested URL for security and reliability purposes.</li>
-    </ul>
-    <p class="todo">TODO: add analytics, cookies, or third-party processors here if you add any.</p>
-
-    <h2>How we use it</h2>
-    <p>To reply to your enquiry, to operate and secure the site, and to meet legal
-    obligations. We do not sell personal information.</p>
-
-    <h2>Retention</h2>
-    <p>Contact enquiries are kept for <span class="todo">TODO: retention period</span>,
-    then deleted.</p>
-
-    <h2>Your rights</h2>
-    <p>Depending on where you live, you may have the right to access, correct, or
-    delete the personal information we hold about you. Email
-    <a href="mailto:hello@orindalabs.com">hello@orindalabs.com</a> and we will respond
-    within the period required by applicable law.</p>
-
-    <h2>Changes</h2>
-    <p>If we change this policy we will update the date above.</p>
-    <p style="margin-top:3rem"><a href="/#contact">Questions? Contact us.</a></p>
+    <a href="/" aria-label="Orinda Labs home">
+      <img class="logo logo-dark" src="/assets/brand/orinda-labs-dark.svg" alt="Orinda Labs" width="204" height="72">
+      <img class="logo logo-light" src="/assets/brand/orinda-labs.svg" alt="Orinda Labs" width="204" height="72">
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/vision.html">Vision</a>
+      <a href="/company.html">Company</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-label="Switch colour theme">
+      <svg class="sun" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.4 5.4l1.7 1.7M16.9 16.9l1.7 1.7M18.6 5.4l-1.7 1.7M7.1 16.9l-1.7 1.7"/></g></svg>
+      <svg class="moon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M20 14.2A8.4 8.4 0 0 1 9.8 4 8.4 8.4 0 1 0 20 14.2Z"/></svg>
+    </button>
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+</header>
+
+<main id="main">
+<section class="sec">
+  <div class="wrap prose">
+    <p class="eyebrow">Legal</p>
+    <h1 style="font-size:clamp(1.8rem,4vw,2.4rem);margin:10px 0 6px">Privacy Policy</h1>
+    <p class="updated">
+      Applies to this website, orindalabs.com. Last updated
+      <span class="owner-fill">[DATE]</span>.
+      <!-- OWNER: fill — publication date -->
+    </p>
+
+      <p style="background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);
+                padding:14px 16px;font-size:.9rem">
+        <strong>TODO(legal):</strong> this document is a starting template and has not been
+        reviewed by counsel. Have it reviewed before relying on it commercially. Items marked
+        <span class="owner-fill">like this</span> need an owner decision first.
+      </p>
+
+    <h2>1. Who is responsible for your information</h2>
+    <p>
+      <strong>Orinda Labs LLC</strong>, a California limited liability company at 2108 N St, Ste N,
+      Sacramento, CA 95816, USA, is the controller of personal information collected through this website.
+      Contact <a href="mailto:privacy@orindalabs.com">privacy@orindalabs.com</a> about anything in this policy.
+    </p>
+
+    <h2>2. Scope &mdash; this website only</h2>
+    <p>
+      This policy covers the Orinda Labs website. <strong>Raplo Capture, a product of
+      Orinda Labs LLC, has its own privacy policy</strong> covering the information processed inside
+      the product, including visitor contact details and conversations captured at events. If
+      you are asking how the product handles captured data, that policy is the one that
+      applies.
+    </p>
+
+    <h2>3. What this website collects</h2>
+    <ul>
+      <li>
+        <strong>What you send us.</strong> If you email one of the addresses on this site, we
+        receive your email address, your name if you give it, and whatever is in your message.
+      </li>
+      <li>
+        <strong>Server request logs.</strong> Our hosting provider records the IP address, user
+        agent, and requested URL of each request, for security and reliability.
+      </li>
+      <li>
+        <strong>A theme preference.</strong> If you use the light/dark toggle, your choice is
+        stored in your own browser&#8217;s local storage. It never leaves your device and we
+        cannot read it.
+      </li>
+    </ul>
+
+    <h2>4. What this website does not do</h2>
+    <p>
+      This site runs <strong>no third-party analytics, no advertising trackers, and no
+      third-party cookies</strong>. Fonts are served from this domain, not from a font network.
+      We do not sell or share personal information, and we do not build advertising profiles.
+    </p>
+
+    <h2>5. Why we use it</h2>
+    <p>
+      To reply to your enquiry, to keep the site secure and available, and to comply with legal
+      obligations. That is the entire list.
+    </p>
+
+    <h2>6. How long we keep it</h2>
+    <p>
+      Email correspondence is retained for <span class="owner-fill">[RETENTION PERIOD]</span>
+      and then deleted, unless we need to keep it longer for a legal or contractual reason.
+      Server logs are retained for the period set by our hosting provider.
+      <!-- OWNER: fill — retention period for email correspondence, with counsel -->
+    </p>
+
+    <h2>7. Who else sees it</h2>
+    <p>
+      Our hosting and email providers process this information on our behalf, under contract
+      and only on our instructions. We disclose information to anyone else only where the law
+      requires it.
+    </p>
+
+    <h2>8. Your rights</h2>
+    <p>
+      Depending on where you live, you may have the right to access, correct, delete, or
+      restrict our use of your personal information, to obtain a copy of it, and to object to
+      certain processing. California residents have specific rights under the CCPA/CPRA,
+      including the right to know, to delete, to correct, and to be free from discrimination
+      for exercising them. We do not sell or share personal information as those terms are
+      defined in the CCPA.
+    </p>
+    <p>
+      To exercise any of these, email <a href="mailto:privacy@orindalabs.com">privacy@orindalabs.com</a>. We
+      respond within the period required by applicable law and will not charge you for a
+      reasonable request.
+    </p>
+
+    <h2>9. Consent is how our products work</h2>
+    <p>
+      Consent is not an afterthought in what we build. In Raplo Capture, a visitor&#8217;s
+      contact details and conversation are captured only when that visitor has explicitly
+      consented, and the person the data is about can have it deleted. The same commitment
+      applies to every product we have in development. See our
+      <a href="/vision.html">vision page</a> for how that principle shapes the product line.
+    </p>
+
+    <h2>10. Children</h2>
+    <p>
+      This website is not directed to children under 16 and we do not knowingly collect their
+      personal information through it.
+    </p>
+
+    <h2>11. Changes</h2>
+    <p>
+      If this policy changes we will update the date at the top of the page.
+    </p>
+
+    <h2>12. Contact</h2>
+    <p>
+      <a href="mailto:privacy@orindalabs.com">privacy@orindalabs.com</a>, or by post to Orinda Labs LLC,
+      2108 N St, Ste N, Sacramento, CA 95816, USA.
+    </p>
+  </div>
+</section>
 </main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="logo logo-dark" src="/assets/brand/orinda-labs-dark.svg" alt="Orinda Labs" width="204" height="72">
+        <img class="logo logo-light" src="/assets/brand/orinda-labs.svg" alt="Orinda Labs" width="204" height="72">
+        <p>Orinda Labs LLC is a California limited liability company building commercial
+        ambient intelligence software for events and venues.</p>
+      </div>
+      <nav class="foot-col" aria-label="Company">
+        <h4>Company</h4>
+        <a href="/company.html">Company details</a>
+        <a href="/vision.html">Vision</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <nav class="foot-col" aria-label="Product">
+        <h4>Product</h4>
+        <a href="https://raplo.ai/">Raplo Capture</a>
+        <a href="https://capture.raplo.ai">Open the app</a>
+        <a href="https://raplo.ai/pricing.html">Plans &amp; pricing</a>
+      </nav>
+    </div>
+    <div class="foot-legal">
+      <p>&copy; <span class="yr">2026</span> Orinda Labs LLC. Orinda Labs LLC is the maker of Raplo Capture.</p>
+      <p><a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="/site.js" defer></script>
 </body>
 </html>
