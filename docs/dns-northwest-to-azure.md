@@ -68,6 +68,98 @@ changing any DNS. Never point DNS at an origin you have not tested.
 
 ---
 
+## The exact records for orindalabs.com
+
+Observed state (2026-09-01, via public DNS — re-check before acting):
+
+| Name | Type | Current value | TTL |
+|---|---|---|---|
+| `orindalabs.com` | `NS` | `ns1/ns2.hosting.businessidentity.llc` | — |
+| `orindalabs.com` | `A` | `66.223.49.89` (returns **503** — nothing working is served) | 60s |
+| `www.orindalabs.com` | `A` | `66.223.49.89` | 60s |
+| `orindalabs.com` | `MX` | `1 smtp.google.com.` — **live Google Workspace mail** | 60s |
+| `orindalabs.com` | `TXT` | `v=spf1 a mx include:spf.postal.businessidentity.llc ~all` | 60s |
+| `orindalabs.com` | `TXT` | `google-site-verification=HKjcjnCBAJ5fqM6X0okJCQRS4wJyPGzrgYBtFP7im_s` | 60s |
+| `_dnsauth.orindalabs.com` | `TXT` | *(does not exist yet)* | — |
+
+**TTLs are already 60s**, so the TTL-lowering dance further down this document is
+unnecessary here — a rollback propagates in about a minute.
+
+DNS is served by Northwest's hosting arm (`hosting.businessidentity.llc`), so make
+these changes in that control panel, not at a separate DNS provider.
+
+### Step 1 — tell Azure first (this generates the token for step 2)
+
+```bash
+az staticwebapp hostname set -n swa-orinda-labs -g rg-orinda-web \
+  --hostname www.orindalabs.com
+az staticwebapp hostname set -n swa-orinda-labs -g rg-orinda-web \
+  --hostname orindalabs.com --validation-method dns-txt-token
+az staticwebapp hostname show -n swa-orinda-labs -g rg-orinda-web \
+  --hostname orindalabs.com --query validationToken -o tsv
+```
+
+### Step 2 — the three changes
+
+| # | Action | Type | Host | Value |
+|---|---|---|---|---|
+| 1 | **Delete the `A` record first**, then add | `CNAME` | `www` | `proud-pond-015f5471e.6.azurestaticapps.net` |
+| 2 | Add | `TXT` | `_dnsauth` | the `validationToken` from step 1 |
+| 3 | **Replace** the existing `A` | `ALIAS` / `ANAME` | `@` | `proud-pond-015f5471e.6.azurestaticapps.net` |
+
+Row 1: the `www` `A` record must be **deleted** before the `CNAME` is added — DNS
+forbids a `CNAME` coexisting with other record types at the same name.
+
+Row 3: if the panel offers no `ALIAS`/`ANAME`, **URL-forward** `orindalabs.com` →
+`https://www.orindalabs.com` instead. Never point an `A` record at an Azure Static
+Web Apps IP: they are shared edge addresses and they rotate without notice.
+
+### Leave these alone
+
+```
+MX    @   1 smtp.google.com.
+TXT   @   "v=spf1 a mx include:spf.postal.businessidentity.llc ~all"
+TXT   @   "google-site-verification=HKjcjnCBAJ5fqM6X0okJCQRS4wJyPGzrgYBtFP7im_s"
+```
+
+Losing the `MX` or the `SPF` record breaks email. That is the usual way a domain move
+goes wrong.
+
+### Two mail notes
+
+**Caused by this change.** The SPF record begins with the `a` mechanism, which
+authorises whatever IP the apex `A` record resolves to. Once the apex points at Azure,
+`a` authorises Azure's *shared* edge IPs to send mail as this domain — a spoofing
+surface, not a breakage. After cutover, and once nothing sends mail from the old apex
+host, drop it:
+
+```
+v=spf1 mx include:spf.postal.businessidentity.llc ~all
+```
+
+**Pre-existing, unrelated to this move.** With Google Workspace as the mail host, SPF
+has no `include:_spf.google.com`; it relies on `mx`, which only authorises
+`smtp.google.com`'s own addresses, while Google sends from a far wider range. Outbound
+Workspace mail is likely soft-failing SPF already. Worth fixing separately, with
+whoever manages the mail.
+
+### Step 3 — verify
+
+```bash
+dig +short www.orindalabs.com CNAME
+dig +short _dnsauth.orindalabs.com TXT
+dig +short MX orindalabs.com          # must still be smtp.google.com
+
+az staticwebapp hostname list -n swa-orinda-labs -g rg-orinda-web -o table
+# poll until Status is "Ready", then TLS is issued within ~15 minutes
+
+scripts/live-smoke.sh https://www.orindalabs.com
+```
+
+Send a test email to and from the domain before considering the move done.
+
+---
+
 ## Option A — Keep the domain at Northwest, point it at Azure  ⭐ recommended
 
 ### A1. Add the custom domains in Azure
