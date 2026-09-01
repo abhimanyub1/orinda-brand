@@ -17,23 +17,13 @@ No build step, no dependencies, no trackers, self-hosted fonts.
 
 ## Fill these in before launch
 
-| Placeholder | Where | Notes |
-|---|---|---|
-| **[YEAR] formed** | `company.html` | Year of formation from the CA Secretary of State filing |
-| **[DATE] published** | `terms.html`, `privacy.html` | Publication date of each document |
-| **[RETENTION PERIOD]** | `privacy.html` | How long email correspondence is kept |
-| **Governing-law state** | `terms.html` | Defaulted to California; confirm with counsel |
-| **Final domain** | every page + `config/site.json` | Assumed `https://orindalabs.com` |
+**All owner placeholders are filled.** The entity record is complete: Orinda Labs LLC, a
+California limited liability company formed 2026, at 2108 N St, Ste N, Sacramento, CA 95816,
+with phone and all four contact addresses. `scripts/site-check.py` reports any that reappear.
 
-Each is marked in the HTML with a visible `<!-- OWNER: fill -->` comment and rendered in a
-contrasting colour so it cannot ship unnoticed. `scripts/site-check.py` lists every outstanding
-one on each run.
-
-**Already supplied and in place:** legal name, California jurisdiction, mailing address
-(2108 N St, Ste N, Sacramento, CA 95816), phone, all four contact addresses, the product URLs.
-
-Both legal pages carry a `TODO(legal)` banner and are templates, not legal advice. Have
-counsel review them before relying on them commercially.
+The legal pages were drafted in-house and have not been through outside counsel; the caveat
+is recorded as an HTML comment in each page. Have counsel review them before relying on them
+in a dispute.
 
 ---
 
