@@ -31,9 +31,10 @@ in a dispute.
 
 ```
 src/
-  index.html        Who we are · what we sell today · how we earn revenue · condensed vision · entity facts
-  vision.html       The full thesis · the two-sided consented loop · the product line · consent commitment
-  company.html      The entity record — the page a KYC reviewer is looking for
+  index.html        The idea · what we are building · Raplo Capture · what's next · who it's for
+  products.html     Raplo Capture in full, then the five in development
+  vision.html       The thesis · why events first · the two-sided consented loop · consent commitment
+  about.html        About us — who we are and what we believe, ending in five rows of entity facts
   contact.html      Addresses, mailing address, response expectation
   terms.html        Terms of Use — Orinda Labs LLC is the contracting party
   privacy.html      Privacy Policy — this website only; Raplo Capture has its own
