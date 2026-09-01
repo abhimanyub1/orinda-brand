@@ -104,23 +104,33 @@ for p, s in html.items():
 # lands on the home page must still be able to get to the facts. The rule is
 # reachability, not prominence.
 legal = CFG["entity"]["legalName"]
-for p in ("index.html", "company.html", "terms.html", "privacy.html", "contact.html"):
+for p in ("index.html", "about.html", "terms.html", "privacy.html", "contact.html"):
     if p in html and legal not in html[p]:
         err(p, f"legal name {legal!r} not present")
 addr_head = CFG["entity"]["mailingAddress"].split(",")[0]
-for p in ("index.html", "company.html", "contact.html"):
+for p in ("index.html", "about.html", "contact.html"):
     if p in html and addr_head not in html[p]:
         err(p, f"mailing address not present (looked for {addr_head!r})")
 if "index.html" in html:
-    if 'href="/company.html"' not in html["index.html"]:
-        err("index.html", "no link to the company page — a reviewer landing here must be "
-                          "able to reach the entity record in one click")
+    if 'href="/about.html"' not in html["index.html"]:
+        err("index.html", "no link to the about page — a reviewer landing here must be "
+                          "able to reach the entity facts in one click")
     if not re.search(r"limited liability company", html["index.html"], re.I):
         err("index.html", "does not state the entity type")
-if "company.html" in html:
-    for need in ("California", "Revenue model", "Raplo Capture", "Formed"):
-        if need not in html["company.html"]:
-            err("company.html", f"entity record missing {need!r}")
+if "about.html" in html:
+    for need in ("California", "limited liability company", "formed 2026",
+                 "software subscriptions"):
+        if not re.search(re.escape(need), html["about.html"], re.I):
+            err("about.html", f"entity facts missing {need!r}")
+
+# Products must be in the primary navigation, and the shipped one must be
+# distinguishable from the five that are not.
+for p, s_ in html.items():
+    if '<nav class="site-nav"' in s_ and 'href="/products.html"' not in s_:
+        err(p, "Products is missing from the primary navigation")
+if "products.html" in html:
+    if "Available now" not in html["products.html"]:
+        err("products.html", "Raplo Capture is not labelled available now")
 
 # ── 8. Product voice: Raplo is a product, never a company ───────────────────
 for p, s in html.items():

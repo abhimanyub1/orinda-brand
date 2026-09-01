@@ -15,7 +15,7 @@
 import { chromium } from 'playwright';
 
 const BASE = (process.argv[2] || 'http://localhost:8099').replace(/\/$/, '');
-const PAGES = ['/', '/vision.html', '/company.html', '/contact.html',
+const PAGES = ['/', '/products.html', '/vision.html', '/about.html', '/contact.html',
                '/terms.html', '/privacy.html', '/404.html'];
 const IN_DEV = ['Raplo Me', 'Raplo Handshake', 'Raplo Whisper', 'Raplo Autopilot', 'Raplo Floor'];
 
@@ -72,15 +72,16 @@ try {
     check('home states entity type and state',
       /limited liability company/i.test(home) && home.includes('California'));
     check('home states the mailing address', home.includes('2108 N St, Ste N'));
-    check('home states the revenue model', /subscription/i.test(home));
+    // The revenue model deliberately lives on /about, not the home page — the home
+    // page leads with the idea. It is asserted on the about page below.
 
-    await page.click('a[href="/company.html"]');
+    await page.click('a[href="/about.html"]');
     await page.waitForLoadState('networkidle');
-    check('company page is one click from home', /\/company(\.html)?$/.test(new URL(page.url()).pathname));
+    check('about page is one click from home', /\/about(\.html)?$/.test(new URL(page.url()).pathname));
     const co = await page.textContent('main');
     for (const need of ['Orinda Labs LLC', 'California', '2108 N St',
-                        'info@orindalabs.com', 'Raplo Capture', 'Revenue model'])
-      check(`company page states "${need}"`, co.includes(need));
+                        'info@orindalabs.com', 'Raplo Capture', 'Software subscriptions'])
+      check(`about page states "${need}"`, co.includes(need));
     await ctx.close();
   }
 
@@ -88,16 +89,22 @@ try {
   {
     const ctx = await browser.newContext(ctxOpts({ viewport: { width: 1360, height: 900 } }));
     const page = await ctx.newPage();
-    await page.goto(BASE + '/vision.html', { waitUntil: 'networkidle' });
+    await page.goto(BASE + '/products.html', { waitUntil: 'networkidle' });
     for (const name of IN_DEV) {
       const text = await page.locator('.pcard', { hasText: name }).first().textContent();
       check(`${name} is labelled in development`, /In development/i.test(text));
       check(`${name} is not purchasable`, /Not available for purchase/i.test(text));
     }
-    const shipped = await page.locator('.pcard', { hasText: 'Raplo Capture' }).first().textContent();
-    check('Raplo Capture is labelled available now', /Available now/i.test(shipped));
+    const prod = await page.textContent('main');
+    check('Raplo Capture is labelled available now',
+      /Raplo Capture/.test(prod) && /Available now/i.test(prod));
+    check('the shipped product has a try-it call to action',
+      await page.locator('a[href*="capture.raplo.ai"]').first().isVisible());
+    await page.goto(BASE + '/vision.html', { waitUntil: 'networkidle' });
     check('vision links the privacy policy',
       await page.locator('a[href="/privacy.html"]').first().isVisible());
+    check('Products is in the primary navigation',
+      await page.locator('.site-nav a[href="/products.html"]').first().isVisible());
     await ctx.close();
   }
 
@@ -112,9 +119,9 @@ try {
     check('theme toggles and survives a reload',
       picked === await page.evaluate(() => document.documentElement.getAttribute('data-theme')));
 
-    await page.goto(BASE + '/vision.html', { waitUntil: 'networkidle' });
+    await page.goto(BASE + '/products.html', { waitUntil: 'networkidle' });
     check('the active nav item is marked',
-      (await page.getAttribute('.site-nav a[href="/vision.html"]', 'aria-current')) === 'page');
+      (await page.getAttribute('.site-nav a[href="/products.html"]', 'aria-current')) === 'page');
 
     await page.goto(BASE + '/', { waitUntil: 'networkidle' });
     await page.evaluate(async () => {
@@ -160,10 +167,10 @@ try {
   {
     const ctx = await browser.newContext(ctxOpts({ javaScriptEnabled: false, viewport: { width: 1360, height: 900 } }));
     const page = await ctx.newPage();
-    await page.goto(BASE + '/vision.html', { waitUntil: 'load' });
-    check('no-JS: vision content is visible', await page.isVisible('.pcard'));
-    await page.goto(BASE + '/company.html', { waitUntil: 'load' });
-    check('no-JS: the entity record is visible', await page.isVisible('.facts'));
+    await page.goto(BASE + '/products.html', { waitUntil: 'load' });
+    check('no-JS: product content is visible', await page.isVisible('.pcard'));
+    await page.goto(BASE + '/about.html', { waitUntil: 'load' });
+    check('no-JS: the entity facts are visible', await page.isVisible('.facts'));
     await ctx.close();
   }
 } finally {

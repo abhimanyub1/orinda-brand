@@ -22,7 +22,7 @@ try()  { if [ "$1" = "0" ]; then ok "$2"; else bad "$2"; fi; }
 echo "Smoke-testing ${BASE}"
 
 # Pages resolve (following the .html → extensionless redirect Azure applies).
-for p in / /vision.html /company.html /contact.html /terms.html /privacy.html; do
+for p in / /products.html /vision.html /about.html /contact.html /terms.html /privacy.html; do
   code="$(curl -sL -o /dev/null -w '%{http_code}' --max-time 25 "${BASE}${p}" || echo 000)"
   [ "$code" = "200" ] && ok "${p} → 200" || bad "${p} → ${code}"
 done
@@ -42,15 +42,15 @@ printf '%s' "$home" | grep -q "2108 N St, Ste N"; try $? "home carries the maili
 printf '%s' "$home" | grep -qi "subscription"; try $? "home states the revenue model"
 printf '%s' "$home" | grep -q "maker of Raplo Capture"; try $? "footer line present"
 
-company="$(curl -sL --max-time 25 "${BASE}/company.html" || true)"
-printf '%s' "$company" | grep -q "California"; try $? "company page states the jurisdiction"
-printf '%s' "$company" | grep -q "Revenue model"; try $? "company page states the revenue model"
+company="$(curl -sL --max-time 25 "${BASE}/about.html" || true)"
+printf '%s' "$company" | grep -q "California"; try $? "about page states the jurisdiction"
+printf '%s' "$company" | grep -qi "Software subscriptions"; try $? "about page states the revenue model"
 
 # Nothing unshipped may read as available on the live site.
-vision="$(curl -sL --max-time 25 "${BASE}/vision.html" || true)"
+vision="$(curl -sL --max-time 25 "${BASE}/products.html" || true)"
 n="$(printf '%s' "$vision" | grep -c 'In development' || true)"
-[ "$n" -ge 5 ] && ok "vision shows ${n} in-development labels" \
-                || bad "vision shows only ${n} in-development labels (expected 5)"
+[ "$n" -ge 5 ] && ok "products shows ${n} in-development labels" \
+                || bad "products shows only ${n} in-development labels (expected 5)"
 printf '%s' "$vision" | grep -q "Available now"; try $? "Raplo Capture labelled available now"
 
 # Security headers survived the deploy.

@@ -35,8 +35,9 @@
   "_inDevelopmentNote": "Every name in this list MUST carry a visible 'In development' label wherever it appears on the site, and must never be attached to pricing, signup, or a waitlist. scripts/site-check.py enforces the label.",
   "pages": [
     "index.html",
+    "products.html",
     "vision.html",
-    "company.html",
+    "about.html",
     "contact.html",
     "terms.html",
     "privacy.html",

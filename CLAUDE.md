@@ -14,10 +14,11 @@ Static HTML/CSS/JS in `src/`. No build step, no runtime dependencies, no tracker
    that understands real conversations between real people, with consent, and acts on them.
    Raplo Capture is *one application* of that, not the shape of the company. Never let the
    site read as though events are the whole ambition.
-3. **Keep the entity verifiable.** A compliance reviewer — bank, payment processor, state
-   agency, procurement — must still be able to find the legal name, entity type, address,
-   contact, and revenue model. They get there from a clear link, not from the site leading
-   with it. `company.html` is that page; `site-check.py` enforces it stays one click away.
+3. **Keep the entity verifiable — minimally.** A compliance reviewer must still be able to
+   find the legal name, entity type, address, contact, and revenue model. Five rows at the
+   foot of `about.html` do that, plus one quiet line on the home page. **Do not grow it back
+   into a dossier** — the twelve-row version read like a bank-account application and was cut
+   for that reason. `site-check.py` enforces the facts stay reachable in one click.
 
 ## Facts you may state (do not embellish, do not invent)
 
@@ -67,7 +68,10 @@ runs it on every PR — but know them, do not just lean on the checker:
 ## Layout
 
 ```
-src/                index · vision · company · contact · terms · privacy · 404
+src/                index · products · vision · about · contact · terms · privacy · 404
+                    Nav is Products · Vision · About · Contact — an ordinary company site.
+                    about.html is an About Us page that happens to end with the entity facts,
+                    not an entity page with prose attached.
                     site.css (layout + motion) · site.js (theme, reveals, hero canvas)
                     brand/raplo-theme.css — design system, synced from the product monorepo
                     fonts/ — Inter + Fraunces, self-hosted

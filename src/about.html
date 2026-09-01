@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page not found — Orinda Labs LLC</title>
-<meta name="description" content="That page does not exist on the Orinda Labs website.">
+<title>About — Orinda Labs</title>
+<meta name="description" content="Orinda Labs builds ambient intelligence: software that understands real conversations between real people, with their consent. Who we are and what we believe.">
 <meta name="author" content="Orinda Labs LLC">
 <!-- Canonical host is www: the apex forwards here because the DNS provider offers no
      ALIAS/ANAME and DNS forbids a CNAME at the apex. Paths are extensionless because that
      is what Azure serves — /vision.html 301s to /vision. Keep in step with
      config/site.json; scripts/site-check.py fails on drift. -->
-<link rel="canonical" href="https://www.orindalabs.com/404">
+<link rel="canonical" href="https://www.orindalabs.com/about">
 <meta name="theme-color" content="#cc785c">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Orinda Labs">
-<meta property="og:title" content="Page not found — Orinda Labs LLC">
-<meta property="og:description" content="That page does not exist on the Orinda Labs website.">
-<meta property="og:url" content="https://www.orindalabs.com/404">
+<meta property="og:title" content="About — Orinda Labs">
+<meta property="og:description" content="Orinda Labs builds ambient intelligence: software that understands real conversations between real people, with their consent. Who we are and what we believe.">
+<meta property="og:url" content="https://www.orindalabs.com/about">
 <meta property="og:image" content="https://www.orindalabs.com/assets/brand/orinda-labs-1024.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -32,7 +32,6 @@
   try { var t = localStorage.getItem('orinda-theme');
         if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
 </script>
-<meta name="robots" content="noindex">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -46,7 +45,7 @@
     <nav class="site-nav" aria-label="Primary">
       <a href="/products.html">Products</a>
       <a href="/vision.html">Vision</a>
-      <a href="/about.html">About</a>
+      <a href="/about.html" aria-current="page">About</a>
       <a href="/contact.html">Contact</a>
     </nav>
     <button class="theme-btn" type="button" aria-label="Switch colour theme">
@@ -61,15 +60,70 @@
 
 <main id="main">
 <section class="sec">
-  <div class="wrap narrow">
-    <p class="eyebrow">404</p>
-    <h1 style="font-size:clamp(1.8rem,4vw,2.5rem);margin:10px 0 14px">Page not found</h1>
-    <p style="color:var(--ink-2);margin-bottom:20px">
-      That page does not exist on this site. Try the <a href="/">home page</a>, the
-      <a href="/products.html">products</a>, or <a href="/contact.html">contact us</a>
-      and we will point you at the right place.
-    </p>
-    <p><a class="btn ghost" href="/">Back to home</a></p>
+  <div class="wrap">
+    <div class="sec-head rise" style="max-width:68ch">
+      <p class="eyebrow">About us</p>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.5rem)">We are building software that
+        understands the room.</h2>
+      <p>
+        Orinda Labs is an early-stage software company. We think the most valuable thing a
+        person can tell you is still the thing they say out loud, to your face &mdash; and that
+        almost no software has ever been able to hear it.
+      </p>
+    </div>
+
+    <div class="prose rise" style="--i:1">
+      <p>
+        So that is what we build: ambient intelligence. Software that understands real
+        conversations between real people, with their consent, and turns them into something
+        useful &mdash; a recap, a follow-up, an introduction that actually gets made.
+      </p>
+      <p>
+        Our first product, <a href="/products.html">Raplo Capture</a>, does this for events and
+        venues, and it is live today. Events are where we started because the consent is
+        unambiguous and the conversation is worth something to both people in it. They are the
+        first application of the technology, not the last.
+      </p>
+
+      <h3>What we believe</h3>
+      <p>
+        <strong>Consent is the product, not the paperwork.</strong> Nothing enters our software
+        unless the person it is about has agreed, and they can have it deleted. That is a
+        harder way to build and it is the only way this is worth building.
+      </p>
+      <p>
+        <strong>Both sides, or neither.</strong> Tools built on face-to-face moments usually
+        serve one side and treat the other as a row to extract. We think the version that lasts
+        gives something back to the person who spoke.
+      </p>
+      <p>
+        <strong>Ship it, then talk about it.</strong> We would rather hand you working software
+        than a roadmap. The one product we sell is the one you can use this afternoon.
+      </p>
+
+      <h3>Working with us</h3>
+      <p>
+        We are small and early. There is no formal listing and no recruiting process to grind
+        through &mdash; if this is the problem you want to spend a few years on, write to
+        <a href="mailto:info@orindalabs.com">info@orindalabs.com</a> and tell us what you would build.
+      </p>
+    </div>
+
+    <!-- Minimum entity facts. A reviewer needs these; nobody else should have to
+         read past them. Fuller contact routes live on /contact.html. -->
+    <div class="rise" style="--i:2;margin-top:clamp(36px,5vw,52px);max-width:74ch">
+      <p class="eyebrow">Company</p>
+      <dl class="facts" style="margin-top:12px">
+        <div><dt>Legal name</dt><dd>Orinda Labs LLC</dd></div>
+        <div><dt>Entity</dt><dd>Limited liability company, State of California, USA &middot; formed 2026</dd></div>
+        <div><dt>Address</dt><dd>2108 N St, Ste N, Sacramento, CA 95816, USA</dd></div>
+        <div><dt>How we earn</dt><dd>Software subscriptions &mdash;
+          <a href="https://raplo.ai/pricing.html">free tier plus paid monthly plans</a></dd></div>
+        <div><dt>Contact</dt><dd><a href="mailto:info@orindalabs.com">info@orindalabs.com</a> &middot;
+          <a href="tel:+19255402024">(925) 540-2024</a> &middot;
+          <a href="/contact.html">more ways to reach us</a></dd></div>
+      </dl>
+    </div>
   </div>
 </section>
 </main>
