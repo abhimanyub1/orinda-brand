@@ -1,13 +1,13 @@
 {
-  "_comment": "SINGLE SOURCE OF TRUTH for the Orinda Labs corporate site. Change a value HERE, mirror it in the static HTML, then run `python3 scripts/site-check.py` to prove nothing stale survived. The pages are static HTML with no build step, so they cannot import this at runtime — the check script is what keeps them honest.",
-  "domain": "https://orindalabs.com",
+  "_comment": "SINGLE SOURCE OF TRUTH for the Orinda Labs corporate site. Change a value HERE, mirror it in the static HTML, then run `python3 scripts/site-check.py` to prove nothing stale survived. The pages are static HTML with no build step, so they cannot import this at runtime \u2014 the check script is what keeps them honest.",
+  "domain": "https://www.orindalabs.com",
   "entity": {
     "legalName": "Orinda Labs LLC",
     "entityType": "Limited liability company",
     "jurisdiction": "State of California, USA",
     "formedYear": null,
     "mailingAddress": "2108 N St, Ste N, Sacramento, CA 95816, USA",
-    "copyright": "© 2026 Orinda Labs LLC",
+    "copyright": "\u00a9 2026 Orinda Labs LLC",
     "footerLine": "Orinda Labs LLC is the maker of Raplo Capture."
   },
   "contact": {
@@ -26,8 +26,21 @@
     "pricing": "https://raplo.ai/pricing.html"
   },
   "inDevelopment": [
-    "Raplo Me", "Raplo Handshake", "Raplo Whisper", "Raplo Autopilot", "Raplo Floor"
+    "Raplo Me",
+    "Raplo Handshake",
+    "Raplo Whisper",
+    "Raplo Autopilot",
+    "Raplo Floor"
   ],
   "_inDevelopmentNote": "Every name in this list MUST carry a visible 'In development' label wherever it appears on the site, and must never be attached to pricing, signup, or a waitlist. scripts/site-check.py enforces the label.",
-  "pages": ["index.html", "vision.html", "company.html", "contact.html", "terms.html", "privacy.html", "404.html"]
+  "pages": [
+    "index.html",
+    "vision.html",
+    "company.html",
+    "contact.html",
+    "terms.html",
+    "privacy.html",
+    "404.html"
+  ],
+  "_domainNote": "The site is served on www. The apex forwards to it, because the DNS host offers no ALIAS/ANAME record and DNS forbids a CNAME at the apex. Canonicals therefore name the www host, and they name the extensionless path Azure actually serves \u2014 /vision, not /vision.html, which 301s."
 }
