@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://orindalabs.com/sitemap.xml
+Sitemap: https://www.orindalabs.com/sitemap.xml

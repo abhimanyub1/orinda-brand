@@ -94,7 +94,11 @@ every push to `main`, builds a preview environment per PR, and tears it down on 
 run gates on `site-check.py` and then polls the deployed URL until it serves the new page, so
 **a green run means live, not merely uploaded**.
 
-Live: <https://proud-pond-015f5471e.6.azurestaticapps.net> (custom domain pending — see below).
+Live: <https://www.orindalabs.com> (also on <https://proud-pond-015f5471e.6.azurestaticapps.net>).
+The site is served on **www**; the apex forwards to it, because the DNS provider offers no
+`ALIAS`/`ANAME` record and DNS forbids a `CNAME` at the apex. Canonical URLs therefore name
+the www host and the **extensionless** path Azure actually serves — `/vision`, not
+`/vision.html`, which 301s. `site-check.py` fails on drift from `config/site.json`.
 
 Full runbook in [docs/deploy-azure.md](docs/deploy-azure.md).
 
@@ -128,14 +132,14 @@ Static Web App. If it is ever exposed, tell the owner to rotate it immediately.
 ## Outstanding
 
 - `<!-- OWNER: fill -->` placeholders: year of formation, legal-page publication dates, email
-  retention period, governing-law confirmation, final domain. `site-check.py` lists them.
+  retention period, governing-law confirmation. `site-check.py` lists them.
 - Both legal pages carry `TODO(legal)` banners and are templates, not legal advice.
-- **Custom domain is not attached yet.** The site is reachable only on its
-  `*.azurestaticapps.net` URL until the `CNAME` and `TXT` records are added at Northwest —
-  see [docs/dns-northwest-to-azure.md](docs/dns-northwest-to-azure.md).
-- Canonical URLs and `sitemap.xml` use `.html` paths, but Azure serves extensionless URLs and
-  301s the `.html` form. Harmless today; worth aligning before the domain goes public so
-  canonicals do not point at a redirect.
+- **The apex is not serving yet.** `www.orindalabs.com` is live with a managed certificate,
+  but `orindalabs.com` still returns 503 — the forwarding rule at the DNS provider has not
+  taken effect. Until it does, share the `www` URL.
+- SPF still leads with the `a` mechanism, which now authorises Azure's shared edge IPs to send
+  mail as this domain. Drop it once nothing sends from the old apex host — see
+  [docs/dns-northwest-to-azure.md](docs/dns-northwest-to-azure.md).
 
 ## Related
 
