@@ -99,7 +99,10 @@ for p, s in html.items():
     if re.search(r"googletagmanager|google-analytics|gtag\(|fbq\(|hotjar|segment\.com|plausible|mixpanel", s, re.I):
         err(p, "third-party analytics/tracker detected — the site must run none")
 
-# ── 7. Entity facts present where a reviewer will look ──────────────────────
+# ── 7. Entity facts stay reachable ──────────────────────────────────────────
+# The site leads with the vision, not the entity record — but a reviewer who
+# lands on the home page must still be able to get to the facts. The rule is
+# reachability, not prominence.
 legal = CFG["entity"]["legalName"]
 for p in ("index.html", "company.html", "terms.html", "privacy.html", "contact.html"):
     if p in html and legal not in html[p]:
@@ -108,8 +111,14 @@ addr_head = CFG["entity"]["mailingAddress"].split(",")[0]
 for p in ("index.html", "company.html", "contact.html"):
     if p in html and addr_head not in html[p]:
         err(p, f"mailing address not present (looked for {addr_head!r})")
+if "index.html" in html:
+    if 'href="/company.html"' not in html["index.html"]:
+        err("index.html", "no link to the company page — a reviewer landing here must be "
+                          "able to reach the entity record in one click")
+    if not re.search(r"limited liability company", html["index.html"], re.I):
+        err("index.html", "does not state the entity type")
 if "company.html" in html:
-    for need in ("California", "Revenue model", "Raplo Capture"):
+    for need in ("California", "Revenue model", "Raplo Capture", "Formed"):
         if need not in html["company.html"]:
             err("company.html", f"entity record missing {need!r}")
 

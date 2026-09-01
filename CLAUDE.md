@@ -5,13 +5,19 @@ Static HTML/CSS/JS in `src/`. No build step, no runtime dependencies, no tracker
 
 ## What this site is for, in priority order
 
-1. **Entity verification.** The primary readers are compliance reviewers — a bank KYC
-   analyst, a payment processor, a state agency. They must be able to answer, in plain
-   English within 30 seconds: does this entity exist, what does it do, how does it make
-   money, how do I contact it. **Rank every decision against this first.**
-2. **Commercial legitimacy.** It must read as an operating commercial software business
-   with a multi-year plan — a shipped product sold by subscription, terms, privacy, support.
-3. **Customer trust.** Someone checking who is behind Raplo Capture leaves reassured.
+**This ranking changed on 2026-09-01. It used to lead with KYC; it no longer does.**
+
+1. **Inspire.** The visitors who matter are investors, people about to try Raplo Capture for
+   the first time, and people who might come and build here. They should leave excited about
+   what this company is doing. **Rank every decision against this first.**
+2. **Explain what we actually do.** Orinda Labs builds **ambient intelligence** — software
+   that understands real conversations between real people, with consent, and acts on them.
+   Raplo Capture is *one application* of that, not the shape of the company. Never let the
+   site read as though events are the whole ambition.
+3. **Keep the entity verifiable.** A compliance reviewer — bank, payment processor, state
+   agency, procurement — must still be able to find the legal name, entity type, address,
+   contact, and revenue model. They get there from a clear link, not from the site leading
+   with it. `company.html` is that page; `site-check.py` enforces it stays one click away.
 
 ## Facts you may state (do not embellish, do not invent)
 
@@ -35,9 +41,12 @@ runs it on every PR — but know them, do not just lean on the checker:
 - **Every unshipped product is labelled "in development", everywhere it appears.** Only
   Raplo Capture may read as purchasable. Never attach pricing, signup, or a waitlist to an
   in-development product.
-- **Events and venues only.** Never frame anything as meeting transcription, meeting notes,
-  workplace collaboration, or productivity software. If a sentence would fit a
-  workplace-meetings product, rewrite it around events.
+- **Broad technology, events as the proof point.** The *framing* may be as broad as
+  ambient intelligence for real-world, in-person interaction. The *examples* stay events and
+  venues, because that is what is shipped. Never frame anything as meeting transcription,
+  meeting notes, workplace collaboration, or productivity software — that guardrail did not
+  change when the positioning broadened. If a sentence would fit a workplace product, rewrite
+  it. `site-check.py` fails on those words.
 - **Never name, compare against, or allude to another software vendor.** No "alternative to X".
 - **Consent-first language wherever data, memory, or graph concepts appear.** Always
   "consented"; always "the person controls and can delete their data"; always link the
@@ -45,8 +54,12 @@ runs it on every PR — but know them, do not just lean on the checker:
   map of real-world intent" over "a dataset about people".
 - **Raplo Capture is a product of Orinda Labs LLC.** Never write "Raplo is a company".
 - **Truth only.** No invented customers, testimonials, logos, revenue figures, team size, or
-  office photos. If a section needs fabrication to look good, cut it — sparse and honest
-  verifies better.
+  office photos. There is **no publishable traction yet**, so the page earns excitement from
+  the idea and from the fact that the product genuinely ships and can be used today — never
+  from numbers. If a section needs fabrication to look good, cut it. Sparse and honest reads
+  better to an investor than vague puffery, and it is the only version that survives scrutiny.
+- **No invented job listings.** Hiring copy says we are small and early and invites a letter.
+  It never implies open roles that do not exist.
 - **Commercial tone.** Never hobby, side project, experiment, or passion project.
 - **Never restate Raplo Capture's prices here.** Link the product pricing page so they cannot drift.
 - **No third-party trackers or analytics. Fonts stay self-hosted.**
