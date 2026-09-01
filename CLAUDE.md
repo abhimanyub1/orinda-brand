@@ -131,12 +131,17 @@ Static Web App. If it is ever exposed, tell the owner to rotate it immediately.
 
 ## Outstanding
 
-- `<!-- OWNER: fill -->` placeholders: year of formation, legal-page publication dates, email
-  retention period, governing-law confirmation. `site-check.py` lists them.
-- Both legal pages carry `TODO(legal)` banners and are templates, not legal advice.
-- **The apex is not serving yet.** `www.orindalabs.com` is live with a managed certificate,
-  but `orindalabs.com` still returns 503 — the forwarding rule at the DNS provider has not
-  taken effect. Until it does, share the `www` URL.
+- **No `OWNER: fill` placeholders remain.** Entity facts are complete: California LLC formed
+  2026, address, phone, all four contact addresses, product URLs.
+- The legal pages were drafted in-house and have not been through outside counsel. That
+  caveat now lives in an HTML comment in each page rather than a visible banner — a banner
+  telling compliance reviewers the terms were provisional undercut the page it sat on. Get
+  counsel to read them before relying on them in a dispute.
+- **The apex serves over HTTPS but not HTTP.** `https://orindalabs.com` correctly 301s to
+  `https://www.orindalabs.com` with a valid certificate, but `http://orindalabs.com` returns
+  a 503 from the forwarding host — its port-80 listener is not serving the rule. Low impact
+  (browsers try HTTPS first), but plain `http://` links and older clients fail. Fix is at the
+  DNS provider, not here.
 - SPF still leads with the `a` mechanism, which now authorises Azure's shared edge IPs to send
   mail as this domain. Drop it once nothing sends from the old apex host — see
   [docs/dns-northwest-to-azure.md](docs/dns-northwest-to-azure.md).
