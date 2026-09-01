@@ -39,7 +39,7 @@ done
 home="$(curl -sL --max-time 25 "${BASE}/" || true)"
 printf '%s' "$home" | grep -q "Orinda Labs LLC"; try $? "home names the legal entity"
 printf '%s' "$home" | grep -q "2108 N St, Ste N"; try $? "home carries the mailing address"
-printf '%s' "$home" | grep -qi "subscription"; try $? "home states the revenue model"
+# The revenue model deliberately lives on /about, not the home page — asserted below.
 printf '%s' "$home" | grep -q "maker of Raplo Capture"; try $? "footer line present"
 
 company="$(curl -sL --max-time 25 "${BASE}/about.html" || true)"
